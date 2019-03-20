@@ -1,8 +1,17 @@
 <template>
   <v-container fill-height>
-    <v-layout>
+    <v-layout
+      justify-center
+      align-center
+    >
 
-      <v-flex>
+      <v-flex
+        xs12
+        sm6
+        md4
+        lg3
+        xl3
+      >
         <v-card class="elevation-12">
 
           <v-toolbar
