@@ -39,6 +39,7 @@
             <v-btn
               block
               depressed
+              color="secondary"
             >
               Criar Conta
             </v-btn>
