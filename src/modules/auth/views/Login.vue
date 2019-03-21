@@ -18,11 +18,21 @@
             color="primary"
             dark
           >
-            <v-toolbar-title>Login</v-toolbar-title>
+            <v-toolbar-title>{{ texts.toolbar }}</v-toolbar-title>
           </v-toolbar>
 
           <v-card-text>
             <v-form>
+              <v-text-field
+                v-if="!isLogin"
+                prepend-icon="person"
+                name="name"
+                label="Nome"
+                type="text"
+                :error-messages="nameErrors"
+                :success="!$v.user.name.$invalid"
+                v-model.trim="$v.user.name.$model"
+              ></v-text-field>
               <v-text-field
                 prepend-icon="email"
                 name="email"
@@ -46,9 +56,9 @@
               block
               depressed
               color="secondary"
-              @click="log"
+              @click="isLogin = !isLogin"
             >
-              Criar Conta
+              {{ texts.button }}
             </v-btn>
           </v-card-text>
 
@@ -59,7 +69,7 @@
               color="primary"
               large
               @click="submit"
-            >Login</v-btn>
+            >{{ texts.toolbar }}</v-btn>
           </v-card-actions>
 
         </v-card>
@@ -76,24 +86,53 @@ import { required, email, minLength } from 'vuelidate/lib/validators'
 export default {
   name: 'Login',
   data: () => ({
+    isLogin: true,
     user: {
+      name: '',
       email: '',
       password: ''
     }
   }),
-  validations: {
-    user: {
-      email: {
-        required,
-        email
-      },
-      password: {
-        required,
-        minLength: minLength(6)
+  validations () {
+    const validations = {
+      user: {
+        email: {
+          required,
+          email
+        },
+        password: {
+          required,
+          minLength: minLength(6)
+        }
+      }
+    }
+
+    if (this.isLogin) { return validations }
+
+    return {
+      user: {
+        ...validations.user,
+        name: {
+          required,
+          minLength: minLength(3)
+        }
       }
     }
   },
   computed: {
+    texts () {
+      return this.isLogin
+        ? { toolbar: 'Entrar', button: 'Criar conta' }
+        : { toolbar: 'Criar conta', button: 'Já tenho uma conta' }
+    },
+    nameErrors () {
+      const errors = []
+      const name = this.$v.user.name
+      if (!name.$dirty) { return errors }
+      !name.required && errors.push('Nome é obrigatório!')
+      !name.minLength && errors.push(`Insira pelo menos ${name.$params.minLength.min} caracteres!`)
+      return errors
+    },
     emailErrors () {
       const errors = []
       const email = this.$v.user.email
