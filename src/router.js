@@ -27,7 +27,8 @@ router.beforeEach(async (to, from, next) => {
     }
     if (token) {
       try {
-        await AuthService.user({ fetchPolicy: 'network-only' })
+        const user = await AuthService.user({ fetchPolicy: 'network-only' })
+        console.log('User: ', user)
         return next()
       } catch (error) {
         console.log('Auto Login Error: ', error)
