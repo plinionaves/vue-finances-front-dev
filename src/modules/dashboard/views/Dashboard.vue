@@ -1,3 +1,15 @@
 <template>
-  <h1>Bem vindo ao Dashboard!</h1>
+  <AppLayout />
 </template>
+
+<script>
+
+import AppLayout from './../components/AppLayout.vue'
+
+export default {
+  name: 'Dashboard',
+  components: {
+    AppLayout
+  }
+}
+</script>
