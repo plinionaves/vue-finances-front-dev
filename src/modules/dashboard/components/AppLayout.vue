@@ -1,9 +1,15 @@
 <template>
-  <h1>Bem vindo ao Dashboard!</h1>
+  <AppToolbar />
 </template>
 
 <script>
+
+import AppToolbar from './AppToolbar.vue'
+
 export default {
-  name: 'AppLayout'
+  name: 'AppLayout',
+  components: {
+    AppToolbar
+  }
 }
 </script>
