@@ -1,10 +1,15 @@
 <template>
-  <v-list two-line>
+  <v-list
+    two-line
+    subheader
+  >
+    <v-subheader>05/03/2019</v-subheader>
     <RecordsListItem
       v-for="record in records"
       :key="record.id"
       :record="record"
     />
+    <v-divider></v-divider>
   </v-list>
 </template>
 
