@@ -1,7 +1,11 @@
 <template>
   <div>
 
-    <ToolbarByMonth class="mb-2" />
+    <ToolbarByMonth
+      class="mb-2"
+      format="MM-YYYY"
+      @month="changeMonth"
+    />
 
     <v-card>
 
@@ -77,6 +81,9 @@ export default {
     this.records = await RecordsService.records()
   },
   methods: {
+    changeMonth (month) {
+      console.log('Month: ', month)
+    },
     showDivider (index, object) {
       return index < Object.keys(object).length - 1
     }
