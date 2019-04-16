@@ -96,7 +96,6 @@ export default {
   },
   methods: {
     changeMonth (month) {
-      console.log('Month: ', month)
       this.setRecords(month)
     },
     async setRecords (month) {
