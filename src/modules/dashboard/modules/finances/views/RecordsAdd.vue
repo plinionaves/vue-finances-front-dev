@@ -31,7 +31,7 @@
                 :items="accounts"
                 item-text="description"
                 item-value="id"
-                v-model="record.accountId"
+                v-model="$v.record.accountId.$model"
               ></v-select>
 
               <v-select
@@ -41,7 +41,7 @@
                 :items="categories"
                 item-text="description"
                 item-value="id"
-                v-model="record.categoryId"
+                v-model="$v.record.categoryId.$model"
               ></v-select>
 
               <v-text-field
@@ -49,6 +49,7 @@
                 label="Descrição"
                 prepend-icon="description"
                 type="text"
+                v-model="$v.record.description.$model"
               ></v-text-field>
 
               <v-text-field
@@ -56,6 +57,7 @@
                 label="Tags (separadas por vírgula)"
                 prepend-icon="label"
                 type="text"
+                v-model="record.tags"
               ></v-text-field>
 
               <v-text-field
@@ -63,6 +65,7 @@
                 label="Observação"
                 prepend-icon="note"
                 type="text"
+                v-model="record.note"
               ></v-text-field>
 
             </v-form>
@@ -70,9 +73,24 @@
         </v-card>
 
         <v-btn
-          color="primary"
-          @click="log"
-        >Log</v-btn>
+          color="secondary"
+          large
+          fab
+          class="mt-4"
+          @click="$router.back()"
+        >
+          <v-icon>close</v-icon>
+        </v-btn>
+
+        <v-btn
+          :color="color"
+          large
+          fab
+          class="mt-4"
+          @click="submit"
+        >
+          <v-icon>check</v-icon>
+        </v-btn>
 
       </v-flex>
 
@@ -117,6 +135,20 @@ export default {
       description: { required, minLength: minLength(6) }
     }
   },
+  computed: {
+    color () {
+      switch (this.record.type) {
+        case 'CREDIT':
+          return 'primary'
+
+        case 'DEBIT':
+          return 'error'
+
+        default:
+          return 'primary'
+      }
+    }
+  },
   async created () {
     this.changeTitle(this.$route.query.type)
     this.accounts = await AccountsService.accounts()
@@ -145,7 +177,7 @@ export default {
       }
       this.setTitle({ title })
     },
-    log () {
+    submit () {
       console.log('Form: ', this.record)
     }
   }
