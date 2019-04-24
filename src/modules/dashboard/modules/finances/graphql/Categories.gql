@@ -1,0 +1,14 @@
+# import * from './Operation.gql'
+
+query Categories ($operation: Operation) {
+  categories(operation: $operation) {
+    id
+    description
+    operation
+    user {
+      id
+      name
+      email
+    }
+  }
+}
