@@ -49,7 +49,7 @@
                 label="Descrição"
                 prepend-icon="description"
                 type="text"
-                v-model="$v.record.description.$model"
+                v-model.trim="$v.record.description.$model"
               ></v-text-field>
 
               <v-text-field
@@ -58,7 +58,7 @@
                 label="Tags (separadas por vírgula)"
                 prepend-icon="label"
                 type="text"
-                v-model="record.tags"
+                v-model.trim="record.tags"
               ></v-text-field>
 
               <v-text-field
@@ -67,7 +67,7 @@
                 label="Observação"
                 prepend-icon="note"
                 type="text"
-                v-model="record.note"
+                v-model.trim="record.note"
               ></v-text-field>
 
             </v-form>
