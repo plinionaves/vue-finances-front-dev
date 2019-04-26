@@ -11,7 +11,10 @@
         md4
         lg4
       >
-        <NumericDisplay :color="color" />
+        <NumericDisplay
+          :color="color"
+          :value="355.57"
+        />
       </v-flex>
 
       <v-flex
