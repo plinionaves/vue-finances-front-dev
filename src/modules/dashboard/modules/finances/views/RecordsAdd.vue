@@ -166,6 +166,7 @@
           fab
           class="mt-4"
           @click="submit"
+          :disabled="$v.$invalid"
         >
           <v-icon>check</v-icon>
         </v-btn>
@@ -247,6 +248,7 @@ export default {
     const { type } = to.query
     this.changeTitle(type)
     this.record.type = type.toUpperCase()
+    this.record.categoryId = ''
     this.categories = await CategoriesService.categories({ operation: type })
     next()
   },
