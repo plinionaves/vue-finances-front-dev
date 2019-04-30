@@ -13,6 +13,7 @@
     "material-design-icons-iconfont": "^3.0.3",
     "moment": "^2.24.0",
     "roboto-fontface": "*",
+    "rxjs": "^6.5.1",
     "vue": "^2.6.9",
     "vue-router": "^3.0.1",
     "vuelidate": "^0.7.4",
