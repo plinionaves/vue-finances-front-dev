@@ -12,7 +12,7 @@ const createRecord = async variables => {
     mutation: RecordCreateMutation,
     variables,
     update: (proxy, { data: { createRecord } }) => {
-      const month = moment(createRecord.date).format('MM-YYYY')
+      const month = moment(createRecord.date.substr(0, 10)).format('MM-YYYY')
       const variables = { month }
 
       try {
