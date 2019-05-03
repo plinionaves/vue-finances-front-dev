@@ -22,7 +22,7 @@ const createAccount = async variables => {
     update: (proxy, { data: { createAccount } }) => {
       try {
         const data = proxy.readQuery({
-          AccountsQuery
+          query: AccountsQuery
         })
 
         data.accounts = [...data.accounts, createAccount]
