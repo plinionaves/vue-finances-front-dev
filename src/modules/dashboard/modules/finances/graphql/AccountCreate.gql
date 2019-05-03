@@ -1,0 +1,11 @@
+mutation AccountCreate ($description: String!) {
+  createAccount(description: $description) {
+    id
+    description
+    user {
+      id
+      name
+      email
+    }
+  }
+}
