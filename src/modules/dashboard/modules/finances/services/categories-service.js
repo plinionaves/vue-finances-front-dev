@@ -1,14 +1,19 @@
 import apollo from '@/plugins/apollo'
+import { from } from 'rxjs'
+import { map } from 'rxjs/operators'
 
 import CategoriesQuery from './../graphql/Categories.gql'
 import CategoryCreateMutation from './../graphql/CategoryCreate.gql'
 
-const categories = async ({ operation }) => {
-  const response = await apollo.query({
+const categories = ({ operation }) => {
+  const queryRef = apollo.watchQuery({
     query: CategoriesQuery,
     variables: { operation: operation ? operation.toUpperCase() : operation }
   })
-  return response.data.categories
+  return from(queryRef)
+    .pipe(
+      map(res => res.data.categories)
+    )
 }
 
 const createCategory = async variables => {
