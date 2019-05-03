@@ -78,7 +78,22 @@
                 item-text="description"
                 item-value="id"
                 v-model="$v.record.accountId.$model"
-              ></v-select>
+              >
+                <v-list-tile
+                  slot="prepend-item"
+                  ripple
+                  @click=""
+                >
+                  <v-list-tile-action>
+                    <v-icon>add</v-icon>
+                  </v-list-tile-action>
+                  <v-list-tile-title>Conta</v-list-tile-title>
+                </v-list-tile>
+                <v-divider
+                  slot="prepend-item"
+                  class="mt-2"
+                ></v-divider>
+              </v-select>
 
               <v-select
                 name="category"
@@ -88,7 +103,22 @@
                 item-text="description"
                 item-value="id"
                 v-model="$v.record.categoryId.$model"
-              ></v-select>
+              >
+                <v-list-tile
+                  slot="prepend-item"
+                  ripple
+                  @click=""
+                >
+                  <v-list-tile-action>
+                    <v-icon>add</v-icon>
+                  </v-list-tile-action>
+                  <v-list-tile-title>Categoria</v-list-tile-title>
+                </v-list-tile>
+                <v-divider
+                  slot="prepend-item"
+                  class="mt-2"
+                ></v-divider>
+              </v-select>
 
               <v-text-field
                 name="description"
