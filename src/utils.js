@@ -34,9 +34,16 @@ const currencyFormatter = ({ locale, currency } = { locale: 'pt-BR', currency: '
   })
 }
 
+const registerVuexModule = (rootStore, moduleName, store) => {
+  if (!(moduleName in rootStore._modules.root._children)) {
+    rootStore.registerModule(moduleName, store)
+  }
+}
+
 export {
   currencyFormatter,
   groupBy,
   errorHandler,
-  formatError
+  formatError,
+  registerVuexModule
 }
