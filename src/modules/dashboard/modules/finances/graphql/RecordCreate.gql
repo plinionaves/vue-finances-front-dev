@@ -1,3 +1,4 @@
+#import './RecordFragment.gql'
 # import * from './Operation.gql'
 
 mutation RecordCreate (
@@ -20,26 +21,6 @@ mutation RecordCreate (
     tags: $tags,
     note: $note
   ) {
-    id
-    type
-    amount
-    date
-    description
-    tags
-    note
-    account {
-      id
-      description
-    }
-    category {
-      id
-      description
-      operation
-    }
-    user {
-      id
-      name
-      email
-    }
+    ...RecordFragment
   }
 }
