@@ -38,6 +38,62 @@
             <v-icon>check</v-icon>
           </v-btn>
         </v-card-title>
+
+        <v-card-text>
+          <v-list three-line>
+
+            <v-list-tile>
+              <v-list-tile-content>
+                <v-list-tile-title>Tipo de Lançamento</v-list-tile-title>
+                <v-list-tile-sub-title>
+                  <v-select
+                    placeholder="Todos os Lançamentos"
+                    chips
+                    deletable-chips
+                    :items="operations"
+                    item-text="description"
+                    item-value="value"
+                  ></v-select>
+                </v-list-tile-sub-title>
+              </v-list-tile-content>
+            </v-list-tile>
+
+            <v-list-tile>
+              <v-list-tile-content>
+                <v-list-tile-title>Conta</v-list-tile-title>
+                <v-list-tile-sub-title>
+                  <v-select
+                    placeholder="Todas as Contas"
+                    chips
+                    deletable-chips
+                    multiple
+                    :items="accounts"
+                    item-text="description"
+                    item-value="id"
+                  ></v-select>
+                </v-list-tile-sub-title>
+              </v-list-tile-content>
+            </v-list-tile>
+
+            <v-list-tile>
+              <v-list-tile-content>
+                <v-list-tile-title>Categoria</v-list-tile-title>
+                <v-list-tile-sub-title>
+                  <v-select
+                    placeholder="Todas as Categorias"
+                    chips
+                    deletable-chips
+                    multiple
+                    :items="categories"
+                    item-text="description"
+                    item-value="id"
+                  ></v-select>
+                </v-list-tile-sub-title>
+              </v-list-tile-content>
+            </v-list-tile>
+
+          </v-list>
+        </v-card-text>
       </v-card>
     </v-dialog>
 
@@ -45,14 +101,41 @@
 </template>
 
 <script>
+
+import AccountsService from './../services/accounts-service'
+import CategoriesService from './../services/categories-service'
+
 export default {
   name: 'RecordsFilter',
   data: () => ({
-    showFilterDialog: false
+    accounts: [],
+    categories: [],
+    operations: [
+      { description: 'Receita', value: 'CREDIT' },
+      { description: 'Despesa', value: 'DEBIT' }
+    ],
+    showFilterDialog: false,
+    subscriptions: []
   }),
+  created () {
+    this.setItems()
+  },
+  destroyed () {
+    this.subscriptions.forEach(s => s.unsubscribe())
+  },
   methods: {
     filter (e) {
       console.log('Filters')
+    },
+    setItems () {
+      this.subscriptions.push(
+        AccountsService.accounts()
+          .subscribe(accounts => (this.accounts = accounts))
+      )
+      this.subscriptions.push(
+        CategoriesService.categories()
+          .subscribe(categories => (this.categories = categories))
+      )
     }
   }
 }
