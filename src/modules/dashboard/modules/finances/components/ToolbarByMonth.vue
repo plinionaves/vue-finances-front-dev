@@ -14,13 +14,27 @@
         </div>
       </v-flex>
 
-      <v-flex xs10>
+      <v-flex
+        xs8
+        offset-xs1
+      >
         <v-toolbar-title class="text-xs-center">
           <span>{{ currentMonth }}</span>
         </v-toolbar-title>
       </v-flex>
 
-      <v-flex xs1>
+      <v-flex
+        xs1
+        text-xs-right
+        v-if="showSlot"
+      >
+        <slot />
+      </v-flex>
+
+      <v-flex
+        xs1
+        :class="arrowRightClass"
+      >
         <div class="text-xs-right">
           <v-btn
             icon
@@ -45,12 +59,19 @@ export default {
   props: {
     color: String,
     format: String,
-    month: String
+    month: String,
+    showSlot: {
+      type: Boolean,
+      default: false
+    }
   },
   data: () => ({
     date: undefined
   }),
   computed: {
+    arrowRightClass () {
+      return !this.showSlot ? 'offset-xs1' : ''
+    },
     currentMonth () {
       return this.date.format('MMMM YYYY')
     }
