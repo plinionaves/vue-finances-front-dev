@@ -13,6 +13,22 @@
       />
     </v-flex>
 
+    <v-flex
+      v-for="chart in charts"
+      :key="chart.title"
+      xs12
+      sm6
+      md6
+      lg6
+      xl6
+    >
+      <v-card>
+        <v-card-text>
+          <h2 class="font-weight-light mb-4">{{ chart.title }}</h2>
+        </v-card-text>
+      </v-card>
+    </v-flex>
+
   </v-layout>
 </template>
 
@@ -31,6 +47,10 @@ export default {
     ToolbarByMonth
   },
   data: () => ({
+    charts: [
+      { title: 'Receitas vs Despesas' },
+      { title: 'Despesas por Categoria' }
+    ],
     monthSubject$: new Subject(),
     records: [],
     subscriptions: []
