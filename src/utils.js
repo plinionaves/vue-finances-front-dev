@@ -27,6 +27,13 @@ const groupBy = (array, key, makeCurrentKey) => {
   }, {})
 }
 
+const idx = (object, keyPath) => {
+  const keys = keyPath.split('.')
+  return keys.reduce(
+    (obj, current) => (obj && obj[current] !== undefined) ? obj[current] : null, object
+  )
+}
+
 const currencyFormatter = ({ locale, currency } = { locale: 'pt-BR', currency: 'BRL' }) => {
   return new Intl.NumberFormat(locale, {
     style: 'currency',
