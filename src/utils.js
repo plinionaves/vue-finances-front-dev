@@ -34,6 +34,14 @@ const idx = (object, keyPath) => {
   )
 }
 
+const generateChartConfigs = (opts) => {
+  const { type } = opts
+
+  return {
+    type
+  }
+}
+
 const currencyFormatter = ({ locale, currency } = { locale: 'pt-BR', currency: 'BRL' }) => {
   return new Intl.NumberFormat(locale, {
     style: 'currency',
