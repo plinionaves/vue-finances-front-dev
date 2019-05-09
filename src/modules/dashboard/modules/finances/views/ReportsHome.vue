@@ -7,9 +7,9 @@
     <v-flex xs12>
       <ToolbarByMonth
         format="MM-YYYY"
-        color="primary"
         :month="month || $route.query.month"
         @month="changeMonth"
+        :color="color"
       />
     </v-flex>
 
@@ -61,7 +61,15 @@ export default {
     subscriptions: []
   }),
   computed: {
-    ...mapState('finances', ['month'])
+    ...mapState('finances', ['month']),
+    recordsSum () {
+      return this.records.reduce((acc, record) => acc + record.amount, 0)
+    },
+    color () {
+      return this.recordsSum < 0
+        ? 'error'
+        : 'primary'
+    }
   },
   created () {
     this.setTitle({ title: 'Relatórios' })
