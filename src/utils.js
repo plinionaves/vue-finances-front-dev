@@ -72,7 +72,7 @@ const generateChartData = ({ items, keyToGroup, keyOfValue, aliases, type, backg
       grouped[key].reduce((acc, item) => acc + item[keyOfValue], 0)
   }
 
-  const labels = Object.keys(response) // Receitas, Despesas
+  const labels = Object.keys(response)
 
   switch (type) {
     case 'bar':
@@ -83,6 +83,16 @@ const generateChartData = ({ items, keyToGroup, keyOfValue, aliases, type, backg
           backgroundColor: backgroundColors[index],
           borderWidth: 0
         }))
+      }
+
+    case 'doughnut':
+      return {
+        datasets: [{
+          data: labels.map(label => response[label] >= 0 ? response[label] : -response[label]),
+          backgroundColor: backgroundColors,
+          borderWidth: 0
+        }],
+        labels: items.length > 0 ? labels : []
       }
   }
 }
