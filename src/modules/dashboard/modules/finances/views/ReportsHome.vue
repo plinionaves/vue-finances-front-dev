@@ -115,13 +115,7 @@ export default {
         type: 'doughnut',
         items: this.records.filter(r => r.type === 'DEBIT'),
         keyToGroup: 'category.description',
-        keyOfValue: 'amount',
-        backgroundColors: [
-          this.$vuetify.theme.accent,
-          this.$vuetify.theme.warning,
-          this.$vuetify.theme.info,
-          this.$vuetify.theme.success
-        ]
+        keyOfValue: 'amount'
       }))
     },
     setRecords () {
