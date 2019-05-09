@@ -47,6 +47,19 @@ const generateChartOptions = (type) => {
         }
       }
       break
+
+    case 'doughnut':
+      tooltips = {
+        callbacks: {
+          label (tooltip, data) {
+            const label = data.labels[tooltip.index]
+            const value = currencyFormatter()
+              .format(data.datasets[tooltip.datasetIndex].data[tooltip.index])
+            return `${label}: ${value}`
+          }
+        }
+      }
+      break
   }
 
   const scales = {
