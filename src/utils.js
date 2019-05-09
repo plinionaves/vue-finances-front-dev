@@ -35,6 +35,20 @@ const idx = (object, keyPath) => {
 }
 
 const generateChartOptions = (type) => {
+  let tooltips
+  switch (type) {
+    case 'bar':
+      tooltips = {
+        callbacks: {
+          title () { },
+          label (tooltip, data) {
+            return data.datasets[tooltip.datasetIndex].label
+          }
+        }
+      }
+      break
+  }
+
   const scales = {
     yAxes: [{
       ticks: {
@@ -44,7 +58,8 @@ const generateChartOptions = (type) => {
   }
 
   return {
-    scales
+    scales,
+    tooltips
   }
 }
 
