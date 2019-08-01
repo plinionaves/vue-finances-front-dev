@@ -24,8 +24,10 @@ const onLogout = async apollo => {
   await resetApolloClient(apollo)
 }
 
+const uri = process.env.VUE_APP_API_URL || 'http://localhost:4000'
+
 const link = new HttpLink({
-  uri: process.env.VUE_APP_API_URL
+  uri
 })
 
 const authLink = new ApolloLink((operation, forward) => {
